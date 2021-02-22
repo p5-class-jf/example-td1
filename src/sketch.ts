@@ -8,12 +8,14 @@ const params = {
     Random_Seed: 0,
     Dispersion: 0.14,
     Opacity: 20,
+    Min_Gray: 150,
     Download_Image: () => save(),
 }
 gui.add(params, "N", 0, 5000, 1)
 gui.add(params, "Dispersion", 0, 0.5, 0.0001)
 gui.add(params, "Opacity", 0, 255, 1)
 gui.add(params, "Random_Seed", 0, 100, 1)
+gui.add(params, "Min_Gray", 0, 255, 1)
 gui.add(params, "Download_Image")
 
 // -------------------
@@ -24,9 +26,10 @@ function draw() {
     randomSeed(params.Random_Seed)
     background('#00d0ff')
     noStroke()
-    fill(255, 255, 255, params.Opacity)
     translate(width/2, height/2)
     for (let i = 0; i < params.N; i++) {
+        const gray = random(params.Min_Gray, 255)
+        fill(gray, gray, gray, params.Opacity)
         const angle = random(TWO_PI)
         const radius = randomGaussian(0, width * params.Dispersion)
         ellipse(radius * cos(angle), radius * sin(angle), 30)
