@@ -4,10 +4,12 @@
 
 const gui = new dat.GUI()
 const params = {
-    Ellipse_Size: 30,
+    N: 4000,
+    Random_Seed: 0,
     Download_Image: () => save(),
 }
-gui.add(params, "Ellipse_Size", 0, 100, 1)
+gui.add(params, "N", 0, 5000, 1)
+gui.add(params, "Random_Seed", 0, 100, 1)
 gui.add(params, "Download_Image")
 
 // -------------------
@@ -15,8 +17,13 @@ gui.add(params, "Download_Image")
 // -------------------
 
 function draw() {
-    background(0)
-    ellipse(mouseX, mouseY, params.Ellipse_Size)
+    randomSeed(params.Random_Seed)
+    background('#00d0ff')
+    noStroke()
+    fill(255, 255, 255, 100)
+    for (let i = 0; i < params.N; i++) {
+        ellipse(random(width), random(height), 30)
+    }
 }
 
 // -------------------
