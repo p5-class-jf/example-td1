@@ -21,8 +21,11 @@ function draw() {
     background('#00d0ff')
     noStroke()
     fill(255, 255, 255, 100)
+    translate(width/2, height/2)
     for (let i = 0; i < params.N; i++) {
-        ellipse(random(width), random(height), 30)
+        const angle = random(TWO_PI)
+        const radius = random(width / 4)
+        ellipse(radius * cos(angle), radius * sin(angle), 30)
     }
 }
 
